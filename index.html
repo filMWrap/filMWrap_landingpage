@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>filMWrap</title>
+<link rel="icon" href="images/logo_20.png" type="image/png">
+
+<!-- Meta tag Open Graph per anteprima social -->
+<meta property="og:title" content="filMWrap">
+<meta property="og:description" content="Il punto di incontro tra creativi e industria del cinema italiano">
+<meta property="og:image" content="https://filmapp-1.github.io/filMapp_landingpage/images/logo_rounded.png">
+<meta property="og:url" content="https://filmapp-1.github.io/filMapp_landingpage/">
+
+
+<style>
+html { scroll-behavior: smooth; }
+body {
+  font-family: system-ui, sans-serif;
+  background-color: #0d0d0d;
+  margin: 0;
+  padding: 0;
+  color: #fff;
+}
+
+/* Hero wrapper centrato */
+.hero-wrapper { display: flex; justify-content: center; padding: 80px 20px; }
+
+/* Rettangolo viola principale */
+.hero {
+  background-color: #5E29C7;
+  border-radius: 66px;
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px 40px;
+  gap: 30px;
+  align-items: flex-start;
+  justify-content: center;
+  min-height: 400px;
+  overflow: hidden;
+}
+
+
+/* Nascondi mobile-menu di default */
+.mobile-menu { display: none; }
+
+/* Top menu links: make Contatti e FAQ white and bold */
+.menu a,
+.mobile-menu .menu a {
+  color: #ffffff;
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 1.5rem; /* aumentato per desktop */
+  padding: 8px 12px;
+  text-align: center;
+}
+
+/* Center desktop menu and space items */
+.menu {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+/* For the menu inside the hero (desktop) make text larger */
+@media (min-width: 769px) {
+  .hero-left .menu a {
+    font-size: 1.8rem;
+    line-height: 1.1;
+  }
+}
+
+/* Keep mobile links large and centered */
+@media (max-width: 768px) {
+  .mobile-menu .menu a {
+    font-size: 1.6em;
+    padding: 2.5vw;
+  }
+}
+
+.store-buttons { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; padding-bottom: 15px; }
+.store-buttons img { height: 50px; object-fit: contain; }
+
+/* Logo Banner */
+.logo-banner {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 50px 20px;
+}
+.logo-banner img {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Contatti */
+.contact-section {
+  max-width: 800px;
+  margin: 60px auto;
+  padding: 20px;
+  text-align: center;
+}
+.contact-section h2 { margin-bottom: 20px; color: #fff; }
+.contact-section p { color: #ccc; line-height: 1.5; }
+
+/* FAQ Section */
+.faq-section { max-width: 800px; margin: 60px auto; padding: 20px; }
+.faq-section h2 { text-align: center; margin-bottom: 20px; }
+details {
+  background: #1a1a1a;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  padding: 15px 20px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+details:hover { background: #222; }
+summary { font-weight: bold; font-size: 1.1em; color: #f1f1f1; outline: none; }
+details p { margin-top: 10px; color: #ccc; line-height: 1.5; }
+
+/* Footer */
+footer { text-align: center; padding: 30px 20px; background-color: #111; color: #ccc; font-size: 0.9em; }
+footer a { color: #fff; text-decoration: underline; margin: 0 10px; }
+
+/* Feature Sections */
+.feature-section { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 30px; max-width: 1000px; margin: 60px auto; padding: 20px; position: relative; }
+.feature-left, .feature-right { flex: 1; min-width: 280px; display: flex; justify-content: center; align-items: center; position: relative; flex-direction: column; gap: 20px; }
+.feature-right .rect-bg, .feature-left .rect-bg { position: absolute; width: 80%; max-width: 320px; height: calc(2*300px + 20px); background: #5E29C7; border-radius: 20px; top: 50%; transform: translateY(-50%); z-index: 0; box-shadow: 0 15px 40px rgba(0,0,0,0.4); }
+.feature-box { background: #ffffff; border-radius: 12px; width: 100%; max-width: 300px; aspect-ratio: 1/1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 25px; opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
+.feature-box:hover { transform: scale(1.05); }
+
+
+/* Animazioni */
+.feature-box.visible { opacity: 1; transform: translateY(0); }
+
+/* Responsive */
+@media (max-width: 992px) {
+  .hero { flex-direction: column; padding: 30px 20px; min-height: auto; }
+  .hero-left img { max-width: 100%; transform: translateX(0) translateY(0); }
+  .hero-right { top: 0; margin-top: 20px; }
+  .menu { display: none; }
+  .mobile-menu { display: block; }
+}
+
+@media (max-width: 768px) {
+  /* Menu mobile proporzionato */
+  .mobile-menu .menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+    padding: 4vw 0 2vw; /* ridotto padding verticale per avvicinare il logo */
+    margin: 0;
+    box-sizing: border-box;
+  }
+  .mobile-menu .menu a {
+    flex: 1;
+    text-align: center;
+    font-size: 1.5em;
+    white-space: nowrap;
+  }
+}
+
+  @media (max-width: 768px) {
+  .logo-banner {
+    padding-top: 4vw; /* ridotto da 10vw */
+    padding-bottom: 0;
+    /* se vuoi lasciare padding laterale */
+    padding-left: 25px;
+    padding-right: 25px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Feature box - togli padding verticale */
+  .feature-box {
+    padding-top: 0;
+    padding-bottom: 0;
+    /* se vuoi lasciare padding laterale */
+    padding-left: 25px;
+    padding-right: 25px;
+  }
+.feature-left .rect-bg,
+.feature-right .rect-bg {
+  width: 60%;           /* più stretto su mobile */
+  max-width: 200px;     /* limita la larghezza massima */
+  height: auto;         /* lascia che l'altezza si adatti al contenuto */
+  aspect-ratio: 1/1.5;  /* proporzione simile al desktop */
+  top: 50%;             
+  transform: translateY(-50%);
+}
+/* Desktop: colore normale */
+.feature-left .rect-bg,
+.feature-right .rect-bg {
+  background-color: #5E29C7; /* viola */
+}
+
+/* Mobile: trasparente */
+@media (max-width: 768px) {
+  .feature-left .rect-bg,
+  .feature-right .rect-bg {
+    background-color: #0d0d0d; 
+  }
+}
+}
+
+@media (max-width: 768px) {
+  /* Evidenzia padding della sezione contatti */
+  .contact-section {
+    padding-top: 0vw;   /* o 0 se vuoi eliminare del tutto */
+    padding-bottom: 0vw; /* o 0 */
+  }
+}
+
+  /* Hero proporzionato */
+.hero-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+  padding: 0 20px;
+}
+
+/* aumenta dimensione testo descrittivo */
+.hero-right p {
+  font-size: 1.15rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* frase finale leggermente più grande e separata */
+.hero-right p span {
+  display: inline-block;
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+/* desktop: ancora più grande */
+@media (min-width: 769px) {
+  .hero-right p { font-size: 1.35rem; }
+  .hero-right p span { font-size: 1.45rem; }
+}
+
+/* centra i pulsanti di download dentro hero-right */
+.hero-right .store-buttons {
+  align-items: center;
+  justify-content: center;
+}
+
+/* centra il menu nella colonna sinistra (se presente) */
+.hero-left .menu {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+/* Centra sempre l'immagine mockup nel lato sinistro dell'hero */
+.hero-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* assicura il centraggio orizzontale quando wide/full-width */
+  gap: 20px;
+  padding: 0 20px;         /* padding orizzontale a sinistra/destra */
+  box-sizing: border-box;
+  flex: 1 1 320px;         /* evita che si riduca troppo e cambi layout in modo imprevisto */
+}
+.hero-left img {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
+}
+
+  /* Downloads */
+  .store-buttons { flex-direction: row; gap: 5vw; align-items: center; }
+  .store-buttons img { height: auto; max-height: 8vw; }
+
+  /* Image Wrapper */
+  .image-wrapper img { max-width: 100%; height: auto; }
+  .image-wrapper p { font-size: 4vw; margin-bottom: 3vw; }
+
+
+</style>
+</head>
+<body>
+
+
+<!-- Feature sections, laptop, contatti, faq, footer rimangono invariati -->
+ <!-- Logo Banner -->
+ <div class="logo-banner">
+  <img src="images/logo_banner.png" alt="Logo App">
+</div>
+<!-- Hero -->
+<div class="hero-wrapper">
+  <div class="hero">
+    <div class="hero-left">
+      <div class="menu">
+        <a href="#contacts">Contatti</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <img src="images/mockup1.png" alt="App preview">
+    </div>
+    <div class="hero-right">
+      <h1>L’app pensata per chi lavora nello spettacolo</h1>
+      
+      <p>Un modo semplice e veloce per tenere traccia di ogni lavoro, orario e guadagno. Grazie al nostro algoritmo personalizzato, l’app genera un riassunto di ogni tuo lavoro: pulito, chiaro e facile da capire. Tieni traccia degli orari, giorni e guadagni e genera PDF pronti da condividere con le produzioni e tuoi colleghi.<br>
+        <span style="display:inline-block; margin-top:20px;">
+        Il tuo lavoro, sempre sotto controllo!</span></p>
+      <div class="downloads">
+    
+        <div class="store-buttons">
+          <img src="images/apple.png" alt="Apple Store">
+          <img src="images/google.png" alt="Google Play">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  
+  <!-- Contatti -->
+  <div class="contact-section" id="contacts">
+    <h2>Contatti</h2>
+    <p>Hai domande o vuoi metterti in contatto con noi? Scrivici a:</p>
+    <p><a href="mailto:tuoemail@example.com" style="color:#28CCCB; text-decoration:underline;">hello.filmwrap@gmail.com</a></p>
+      </div>
+  
+  <!-- FAQ -->
+  <div class="faq-section" id="faq">
+    <h2>- FAQ -</h2>
+    <details><summary>Cos'è filMWrap?</summary><p>È la prima app italiana che consente di monitorare lavori, orari e guadagni e di creare riepiloghi e PDF condivisibili.</p></details>
+    <details><summary>È gratuita?</summary><p>L’app è scaricabile gratuitamente. Funzionalità aggiuntive, tra cui esportazione illimitata in PDF, condivisione rapida e supporto prioritario, sono disponibili con un abbonamento Premium.</p></details>
+    <details><summary>Per quali dispositivi?</summary><p>Disponibile per Android ed iOS.</p></details>
+    <details><summary>Serve creare un account?</summary><p>Sì. È necessario creare un account per gestire l’accesso agli abbonamenti e alle funzionalità premium.</p></details>
+    <details><summary>L'app funziona offline?</summary><p>Alcune funzionalità richiedono connessione internet, altre funzionano offline.</p></details>
+    <details><summary>I miei dati sono sicuri?</summary><p>Proteggiamo i tuoi dati con standard di sicurezza elevati e crittografia.</p></details>
+    <details><summary>Come contattare il supporto?</summary><p>Puoi scriverci a <a href="mailto:hello.filmwrap@gmail.com" style="color: #28CCCB;">hello.filmwrap@gmail.com</a></p></details>
+  </div>
+  
+  <!-- Footer -->
+  <footer>
+    <img src="images/logo.png" alt="Logo App" style="width:80px; height:80px; margin-bottom:10px; border-radius:8px; display:block; margin-left:auto; margin-right:auto;">
+    <p style="margin:5px 0;">©2025 filMWrap. All Rights Reserved.</p>
+    <p style="margin:5px 0;">
+      <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms & Conditions</a>
+    </p>
+  </footer>
+
+<script>
+const animateElements = document.querySelectorAll('.feature-box');
+const observer = new IntersectionObserver((entries) => {
+entries.forEach(entry => {
+  if(entry.isIntersecting){
+    entry.target.classList.add('visible');
+    observer.unobserve(entry.target);
+  }
+});
+}, { threshold: 0.3 });
+animateElements.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
